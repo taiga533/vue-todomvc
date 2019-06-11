@@ -1,31 +1,30 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Template • TodoMVC</title>
+		<title>TodoMVC</title>
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
-		<!-- CSS overrides - remove if you don't need it -->
 		<link rel="stylesheet" href="css/app.css">
 	</head>
 	<body>
 		<section class="todoapp">
 			<header class="header">
-				<h1>todos</h1>
-				<input class="new-todo" placeholder="What needs to be done?" autofocus>
+				<h1>Todoリスト</h1>
+				<input class="new-todo" placeholder="なにかやるべきことは？" autofocus>
 			</header>
-			<!-- This section should be hidden by default and shown when there are todos -->
+			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox">
-				<label for="toggle-all">Mark all as complete</label>
+				<label for="toggle-all">すべて完了にする</label>
 				<ul class="todo-list">
-					<!-- These are here just to show the structure of the list items -->
-					<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+					<!-- これらは単にtodoアイテムの構造を示すサンプルです。 -->
+					<!-- リストアイテム（li）要素は編集時は'editing'、完了としてチェックされたときは'completed'クラスが付きます。 -->
 					<li class="completed">
 						<div class="view">
 							<input class="toggle" type="checkbox" checked>
-							<label>Taste JavaScript</label>
+							<label>ラーメンを食べる</label>
 							<button class="destroy"></button>
 						</div>
 						<input class="edit" value="Create a TodoMVC template">
@@ -33,42 +32,43 @@
 					<li>
 						<div class="view">
 							<input class="toggle" type="checkbox">
-							<label>Buy a unicorn</label>
+							<label>お菓子を買う</label>
 							<button class="destroy"></button>
 						</div>
 						<input class="edit" value="Rule the web">
 					</li>
 				</ul>
 			</section>
-			<!-- This footer should hidden by default and shown when there are todos -->
+			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>0</strong> item left</span>
-				<!-- Remove this if you don't implement routing -->
+				<!-- 通常は'残り0項目' -->
+				<span class="todo-count">残り<strong>0</strong>項目</span>
+				<!-- あなたがルーティングを実装しない場合は削除 -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						<a class="selected" href="#/">すべて</a>
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						<a href="#/active">未完了</a>
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						<a href="#/completed">完了</a>
 					</li>
 				</ul>
-				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed">Clear completed</button>
+				<!-- 完了したtodoが存在しない場合は非表示 ↓ -->
+				<button class="clear-completed">完了したものを削除</button>
 			</footer>
 		</section>
 		<footer class="info">
-			<p>Double-click to edit a todo</p>
+			<p>やることをダブルクリックすると編集できます。</p>
 			<!-- Remove the below line ↓ -->
 			<p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
 			<!-- Change this out with your name and url ↓ -->
 			<p>Created by <a href="http://todomvc.com">you</a></p>
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
-		<!-- Scripts here. Don't remove ↓ -->
+		<!-- JavaScriptはここに配置してください。削除しないでください。 -->
 		<script src="node_modules/todomvc-common/base.js"></script>
 		<script src="js/app.js"></script>
 	</body>
