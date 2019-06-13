@@ -27,13 +27,13 @@
 				<ul class="todo-list">
 					<!-- これらは単にtodoアイテムの構造を示すサンプルです。 -->
 					<!-- リストアイテム（li）要素は編集時は'editing'、完了としてチェックされたときは'completed'クラスが付きます。 -->
-					<li :class="{completed: todo.completed, editing: editedTodo}" v-for="todo in filteredTodos" :key="todo.index">
+					<li :class="{completed: todo.completed, editing: editTargetTodo == todo}" v-for="todo in filteredTodos" :key="todo.index">
 						<div class="view">
 							<input class="toggle" type="checkbox"  v-model="todo.completed">
 							<label @dblclick="editTodo(todo)">{{todo.title}}</label>
 							<button class="destroy" @click="removeTodo(todo)"></button>
 						</div>
-						<input class="edit" v-model="todo.title" v-todo-focus="todo == editedTodo" @keyup.enter="updateTodo(todo)" @blur="updateTodo(todo)" @keyup.esc="cancelEditTodo(todo)">
+						<input class="edit" v-model.trim="todo.title" v-todo-focus="todo == editTargetTodo" @keyup.enter="updateTodo(todo)" @blur="updateTodo(todo)" @keyup.esc="cancelEditTodo(todo)">
 					</li>
 				</ul>
 			</section>

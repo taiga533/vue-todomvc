@@ -1,4 +1,4 @@
-const STORAGE_KEY = "todo-list"
+const STORAGE_KEY = "todo-list";
 const todoStorage = {
 	load() {
 		const storedTodos = localStorage.getItem(this.STORAGE_KEY);
@@ -28,7 +28,7 @@ const filter = {
 	}
 };
 
-function Todo(id = 0, title = '', completed = false) {
+function Todo(title = '', id = (new Date()).getTime(), completed = false) {
 	this.id = id;
 	this.title = title;
 	this.completed = completed;
@@ -41,7 +41,7 @@ function Todo(id = 0, title = '', completed = false) {
 		data: {
 			todos: todoStorage.load(),
 			newTodo: '',
-			editedTodo: null,
+			editTargetTodo: null,
 			previousTodoTitle: null,
 			filterCondition: location.hash.replace(/^#\//, '')
 		},
@@ -74,8 +74,8 @@ function Todo(id = 0, title = '', completed = false) {
 		},
 		methods: {
 			addTodo() {
-				if (this.newTodo === "") return;
-				this.todos.push(new Todo(this.todos.length, this.newTodo));
+				if (!this.newTodo) return;
+				this.todos.push(new Todo(this.newTodo));
 				this.newTodo = '';
 			},
 			removeTodo(todo) {
@@ -83,16 +83,16 @@ function Todo(id = 0, title = '', completed = false) {
 				this.todos.splice(index, 1);
 			},
 			editTodo(todo) {
-				this.editedTodo = todo;
+				this.editTargetTodo = todo;
 				this.previousTodoTitle = todo.title;
 			},
 			updateTodo(todo) {
-				this.editedTodo = null;
+				this.editTargetTodo = null;
 				todo.title = todo.title.trim();
 				if (!todo.title) this.removeTodo(todo);
 			},
 			cancelEditTodo(todo) {
-				this.editedTodo = null;
+				this.editTargetTodo = null;
 				todo.title = this.previousTodoTitle;
 			},
 			removeAllCompletedTodo() {
