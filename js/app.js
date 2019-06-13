@@ -1,14 +1,14 @@
 const STORAGE_KEY = "todo-list";
 const todoStorage = {
 	load() {
-		const storedTodos = localStorage.getItem(this.STORAGE_KEY);
+		const storedTodos = localStorage.getItem(STORAGE_KEY);
 		if(storedTodos == null) {
 			return [];
 		};
 		return JSON.parse(storedTodos);
 	},
 	save(todos) {
-		localStorage.setItem(this.STORAGE_KEY, JSON.stringify(todos));
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 	}
 };
 
