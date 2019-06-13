@@ -42,8 +42,8 @@ function Todo(title = '', id = (new Date()).getTime(), completed = false) {
 			todos: todoStorage.load(),
 			newTodo: '',
 			editTargetTodo: null,
-			previousTodoTitle: null,
-			filterCondition: location.hash.replace(/^#\//, '')
+			editTargetTodoTitle: '',
+			filterCondition: location.hash.replace(/^#\//, '') || 'all'
 		},
 		computed: {
 			existsTodo() {
@@ -84,16 +84,16 @@ function Todo(title = '', id = (new Date()).getTime(), completed = false) {
 			},
 			editTodo(todo) {
 				this.editTargetTodo = todo;
-				this.previousTodoTitle = todo.title;
+				this.editTargetTodoTitle = todo.title;
 			},
 			updateTodo(todo) {
+				if (!this.editTargetTodo) return;
 				this.editTargetTodo = null;
-				todo.title = todo.title.trim();
+				todo.title = this.editTargetTodoTitle;
 				if (!todo.title) this.removeTodo(todo);
 			},
-			cancelEditTodo(todo) {
+			cancelEditTodo() {
 				this.editTargetTodo = null;
-				todo.title = this.previousTodoTitle;
 			},
 			removeAllCompletedTodo() {
 				this.todos = filter.active(this.todos);
