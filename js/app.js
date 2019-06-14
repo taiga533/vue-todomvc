@@ -44,16 +44,14 @@
 				return !this.todos.length == 0;
 			},
 			filteredTodos() {
-				if (this.filterCondition == '')
-					return filter['all'](this.todos);
 				return filter[this.filterCondition](this.todos);
 			},
-			completedTodos: {
+			CompletedTodoExists: {
 				get: function() {
-					return filter.completed(this.todos);
+					return filter.completed(this.todos).length;
 				},
 				set: function(checked) {
-					this.todos.map((todo) => todo.completed = checked);
+					this.todos.forEach(todo => todo.completed = checked);
 				}
 			},
 			activeTodos() {
@@ -70,7 +68,7 @@
 			addTodo() {
 				if (!this.newTodo) return;
 				this.todos.push({
-					id: new Date()).getTime(),
+					id: (new Date()).getTime(),
 					title: this.newTodo,
 					completed: false
 				});

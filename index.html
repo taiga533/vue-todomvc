@@ -22,7 +22,7 @@
 			</header>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
 			<section class="main" v-if="existsTodo">
-				<input id="toggle-all" class="toggle-all" v-model="completedTodos" type="checkbox">
+				<input id="toggle-all" class="toggle-all" v-model="CompletedTodoExists" type="checkbox">
 				<label for="toggle-all">すべて完了にする</label>
 				<ul class="todo-list">
 					<!-- これらは単にtodoアイテムの構造を示すサンプルです。 -->
@@ -54,7 +54,7 @@
 					</li>
 				</ul>
 				<!-- 完了したtodoが存在しない場合は非表示 ↓ -->
-				<button class="clear-completed" v-if="completedTodos.length != 0" @click="removeAllCompletedTodo">完了したものを削除</button>
+				<button class="clear-completed" v-if="CompletedTodoExists" @click="removeAllCompletedTodo">完了したものを削除</button>
 			</footer>
 		</section>
 		<footer class="info">
