@@ -1,6 +1,10 @@
 (function (window) {
 	'use strict';
-
-	// Your starting point. Enjoy the ride!
+	new Vue({
+		el: "#app",
+		data: {
+			title: 'Hello, World'
+		}
+	});
 
 })(window);

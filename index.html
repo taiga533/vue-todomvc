@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
 		<link rel="stylesheet" href="css/app.css">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 		<style>
 			[v-cloak] {
 			  display: none;
@@ -16,7 +17,7 @@
 	<body>
 		<section class="todoapp" id="app" v-cloak>
 			<header class="header">
-				<h1>Todoリスト</h1>
+				<h1>{{ title }}</h1>
 				<input class="new-todo" placeholder="なにかやるべきことは？" autofocus>
 			</header>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
