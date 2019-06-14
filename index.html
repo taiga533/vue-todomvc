@@ -12,56 +12,49 @@
 			  display: none;
 			}
 		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 	</head>
 	<body>
 		<section class="todoapp" id="app" v-cloak>
 			<header class="header">
 				<h1>Todoリスト</h1>
-				<input class="new-todo" placeholder="なにかやるべきことは？" autofocus>
+				<input class="new-todo" placeholder="なにかやるべきことは？" v-model.trim="newTodo" autofocus @keyup.enter="addTodo">
 			</header>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
-			<section class="main">
-				<input id="toggle-all" class="toggle-all" type="checkbox">
+			<section class="main" v-if="existsTodo">
+				<input id="toggle-all" class="toggle-all" v-model="CompletedTodoExists" type="checkbox">
 				<label for="toggle-all">すべて完了にする</label>
 				<ul class="todo-list">
 					<!-- これらは単にtodoアイテムの構造を示すサンプルです。 -->
 					<!-- リストアイテム（li）要素は編集時は'editing'、完了としてチェックされたときは'completed'クラスが付きます。 -->
-					<li class="completed">
+					<li :class="{completed: todo.completed, editing: editTargetTodo == todo}" v-for="todo in filteredTodos" :key="todo.index">
 						<div class="view">
-							<input class="toggle" type="checkbox" checked>
-							<label>ラーメンを食べる</label>
-							<button class="destroy"></button>
+							<input class="toggle" type="checkbox"  v-model="todo.completed">
+							<label @dblclick="editTodo(todo)">{{todo.title}}</label>
+							<button class="destroy" @click="removeTodo(todo)"></button>
 						</div>
-						<input class="edit" value="Create a TodoMVC template">
-					</li>
-					<li>
-						<div class="view">
-							<input class="toggle" type="checkbox">
-							<label>お菓子を買う</label>
-							<button class="destroy"></button>
-						</div>
-						<input class="edit" value="Rule the web">
+						<input class="edit" v-model.trim="editTargetTodoTitle" v-todo-focus="todo == editTargetTodo" @keyup.enter="updateTodo(todo)" @blur="updateTodo(todo)" @keyup.esc="cancelEditTodo">
 					</li>
 				</ul>
 			</section>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
-			<footer class="footer">
+			<footer class="footer" v-if="existsTodo">
 				<!-- 通常は'残り0項目' -->
-				<span class="todo-count">残り<strong>0</strong>項目</span>
+				<span class="todo-count">残り<strong>{{activeTodos.length}}</strong>項目</span>
 				<!-- あなたがルーティングを実装しない場合は削除 -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">すべて</a>
+						<a :class="{selected: filterCondition === 'all' || filterCondition === ''}" href="#/" @click="filterCondition = 'all'">すべて</a>
 					</li>
 					<li>
-						<a href="#/active">未完了</a>
+						<a :class="{selected: filterCondition === 'active'}" href="#/active" @click="filterCondition = 'active'">未完了</a>
 					</li>
 					<li>
-						<a href="#/completed">完了</a>
+						<a :class="{selected: filterCondition === 'completed'}" href="#/completed" @click="filterCondition = 'completed'">完了</a>
 					</li>
 				</ul>
 				<!-- 完了したtodoが存在しない場合は非表示 ↓ -->
-				<button class="clear-completed">完了したものを削除</button>
+				<button class="clear-completed" v-if="CompletedTodoExists" @click="removeAllCompletedTodo">完了したものを削除</button>
 			</footer>
 		</section>
 		<footer class="info">
