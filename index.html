@@ -48,6 +48,14 @@
 						</div>
 						<input class="edit" value="Rule the web">
 					</li>
+					<li v-for="todo in todos">
+						<div class="view">
+							<input class="toggle" type="checkbox">
+							<label>{{ todo.title }}</label>
+							<button class="destroy"></button>
+						</div>
+						<input class="edit" value="Rule the web">
+					</li>
 				</ul>
 			</section>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
