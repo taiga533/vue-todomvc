@@ -18,7 +18,12 @@
 		<section class="todoapp" id="app" v-cloak>
 			<header class="header">
 				<h1>{{ title }}</h1>
-				<input class="new-todo" placeholder="なにかやるべきことは？" autofocus>
+				<input
+					class="new-todo"
+					placeholder="なにかやるべきことは？"
+					autofocus
+					v-model="newTodo"
+					v-on:keyup.enter="addTodo">
 			</header>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
 			<section class="main">
