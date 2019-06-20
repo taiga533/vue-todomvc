@@ -30,27 +30,9 @@
 				<input id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">すべて完了にする</label>
 				<ul class="todo-list">
-					<!-- これらは単にtodoアイテムの構造を示すサンプルです。 -->
-					<!-- リストアイテム（li）要素は編集時は'editing'、完了としてチェックされたときは'completed'クラスが付きます。 -->
-					<li class="completed">
+					<li v-for="todo in todos" v-bind:class="{completed: todo.completed}">
 						<div class="view">
-							<input class="toggle" type="checkbox" checked>
-							<label>ラーメンを食べる</label>
-							<button class="destroy"></button>
-						</div>
-						<input class="edit" value="Create a TodoMVC template">
-					</li>
-					<li>
-						<div class="view">
-							<input class="toggle" type="checkbox">
-							<label>お菓子を買う</label>
-							<button class="destroy"></button>
-						</div>
-						<input class="edit" value="Rule the web">
-					</li>
-					<li v-for="todo in todos">
-						<div class="view">
-							<input class="toggle" type="checkbox">
+							<input class="toggle" type="checkbox" v-model="todo.completed">
 							<label>{{ todo.title }}</label>
 							<button class="destroy"></button>
 						</div>
