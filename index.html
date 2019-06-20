@@ -30,13 +30,13 @@
 				<input id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">すべて完了にする</label>
 				<ul class="todo-list">
-					<li v-for="todo in todos" v-bind:class="{completed: todo.completed}">
+					<li v-for="todo in todos"v-bind:class="{completed: todo.completed, editing: editTargetTodo === todo}">
 						<div class="view">
 							<input class="toggle" type="checkbox" v-model="todo.completed">
-							<label>{{ todo.title }}</label>
+							<label v-on:dblclick="editTodo(todo)">{{ todo.title }}</label>
 							<button class="destroy" v-on:click="deleteTodo(todo)"></button>
 						</div>
-						<input class="edit" value="Rule the web">
+						<input class="edit" v-model="editTargetTodoTitle" v-on:keyup.enter="updateTodo(todo)">
 					</li>
 				</ul>
 			</section>
