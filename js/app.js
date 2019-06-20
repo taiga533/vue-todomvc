@@ -16,6 +16,13 @@
 					completed: false
 				});
 				this.newTodo = "";
+			},
+			deleteTodo(deleteTarget) {
+				// 削除対象のtodoの添字を取ってくる
+				const deleteTargetIndex = this.todos.indexOf(deleteTarget);
+				const deleteCount = 1;
+				// 削除対象のtodoをtodosから削除
+				this.todos.splice(deleteTargetIndex, deleteCount);
 			}
 		}
 	});
