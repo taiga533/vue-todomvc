@@ -1,6 +1,6 @@
 (function (window) {
 	'use strict';
-	new Vue({
+	window.app = new Vue({
 		el: "#app",
 		data: {
 			title: 'Hello, World',
@@ -10,6 +10,13 @@
 			editTargetTodo: null,
 			// 編集対象のtodo.title文字列を保存する変数
 			editTargetTodoTitle: ""
+		},
+		computed: {
+			todoCount() {
+				const COMMA_SPLIT_REGEX = /(\d)(?=(\d{3})+$)/g
+				// todosの要素数をカンマ区切りにして返す
+				return this.todos.length.toString().replace(COMMA_SPLIT_REGEX, '$1,');
+			}
 		},
 		methods: {
 			addTodo() {
