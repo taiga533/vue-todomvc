@@ -26,7 +26,7 @@
 					v-on:keyup.enter="addTodo">
 			</header>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
-			<section class="main" v-if="exsitsTodo">
+			<section class="main" v-if="existsTodo">
 				<input id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">すべて完了にする</label>
 				<ul class="todo-list">
@@ -41,7 +41,7 @@
 				</ul>
 			</section>
 			<!-- footerはtodoが何もないときは非表示で、１つでもtodoが存在する場合は表示されます。 -->
-			<footer class="footer" v-if="exsitsTodo">
+			<footer class="footer" v-if="existsTodo">
 				<!-- 通常は'残り0項目' -->
 				<span class="todo-count">残り<strong>{{ todoCount }}</strong>項目</span>
 				<!-- あなたがルーティングを実装しない場合は削除 -->
