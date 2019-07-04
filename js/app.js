@@ -16,6 +16,9 @@
 				const COMMA_SPLIT_REGEX = /(\d)(?=(\d{3})+$)/g
 				// todosの要素数をカンマ区切りにして返す
 				return this.todos.length.toString().replace(COMMA_SPLIT_REGEX, '$1,');
+			},
+			existsTodo() {
+				return this.todos.length > 0;
 			}
 		},
 		methods: {
